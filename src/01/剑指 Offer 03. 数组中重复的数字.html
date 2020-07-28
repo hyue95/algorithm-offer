@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+/* 
+
+找出数组中重复的数字。
+
+在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。
+数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。
+请找出数组中任意一个重复的数字。
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+ */
+
+ var findRepeatNumber = function(nums) {
+  let res = {}
+  let count = 0
+  for(let i = 0; i < nums.length; i ++){
+    if(res[nums[i]]){
+      res[nums[i]] ++
+    }else{
+      res[nums[i]] = 1
+    }
+  }
+  for(let key in res){
+    if(res[key] > 1){
+      return key
+    }
+  }
+};
+
+
+
+
+  </script>
+</body>
+</html>
