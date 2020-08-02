@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+var isValidBST = function(root) {
+  let res = []
+  function traversal(root){
+    if(root === null) return
+    traversal(root.left)
+    res.push(root.val)
+    traversal(root.right)
+  }
+  traversal(root)
+  for(let i = 0; i < res.length-1; i ++){
+    if(res[i] >= res[i+1]){
+      return false
+    }
+  }
+  return true
+};
+
+
+  </script>
+</body>
+</html>

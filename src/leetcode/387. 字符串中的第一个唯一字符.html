@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+var firstUniqChar = function(s) {
+  let arr = Array(26).fill(0)
+  let aCharAtCode = 'a'.charCodeAt()
+  for(let i = 0; i < s.length; i ++){
+    arr[s[i].charCodeAt() - aCharAtCode] = i
+  }
+  for(let i = 0; i < s.length; i ++){
+    if(i === arr[s[i].charCodeAt() - aCharAtCode]){
+      return i
+    }else{
+      arr[s[i].charCodeAt() - aCharAtCode] = -1
+    }
+  }
+  return -1
+};
+
+console.log(firstUniqChar("z"))
+
+  </script>
+</body>
+</html>
