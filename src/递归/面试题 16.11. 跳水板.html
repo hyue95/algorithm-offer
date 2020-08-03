@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+var divingBoard = function(shorter, longer, k) {
+  if(k === 0) return [0]
+  if(shorter === longer) return [shorter * k]
+  let res = []
+  for(let i = 0; i <= k; i ++){
+    res[i] = shorter * (k - i) + longer * i
+  }
+  return res
+};
+console.log(divingBoard(1, 2, 3))
+
+  </script>
+</body>
+</html>
