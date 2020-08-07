@@ -8,9 +8,46 @@
 <body>
   <script>
 
+/* 
+//动态规划
 var numSquares = function(n) {
+  let dp = Array(n + 1).fill(0)
+  for(let i = 1; i <= n; i ++){
+    dp[i] = i
+    for(let j = 1; j <= Math.floor(Math.pow(i, 0.5)); j ++){
+      dp[i] = Math.min(dp[i], dp[i - j * j] + 1)
+    }
+  }
+  return dp[n]
+}; 
+*/
 
+//BFS
+var numSquares = function(n) {
+  if(n === 0) return 0
+  let queue = []
+  queue.push(n)
+  let step = 0
+  let visited = new Set()
+  while(queue.length){
+    let size = queue.length
+    step ++ //在return之前先加加
+    for(let i = 0; i < size; i ++){
+      let cur = queue.shift()
+      for(let j = 1; j <= Math.floor(Math.pow(cur, 0.5)); j ++){
+        let x = cur - j * j
+        if(x === 0) return step
+        if(!visited.has(x)){
+          queue.push(x)
+          visited.add(x)
+        }
+      }
+    }
+  }
+  return step
 };
+
+
     
   </script>
 </body>
