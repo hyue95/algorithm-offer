@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+/* 
+// 计算从起点 start 到终点 target 的最近距离
+int BFS(Node start, Node target) {
+    Queue<Node> q; // 核心数据结构
+    Set<Node> visited; // 避免走回头路
+    
+    q.offer(start); // 将起点加入队列
+    visited.add(start);
+    int step = 0; // 记录扩散的步数
+
+    while (q not empty) {
+        int sz = q.size();
+     将当前队列中的所有节点向四周扩散
+        for (int i = 0; i < sz; i++) {
+            Node cur = q.poll();
+          划重点：这里判断是否到达终点 
+            if (cur is target)
+                return step;
+            将 cur 的相邻节点加入队列 
+            for (Node x : cur.adj())
+                if (x not in visited) {
+                    q.offer(x);
+                    visited.add(x);
+                }
+        }
+        划重点：更新步数在这里 
+        step++;
+    }
+}
+
+第一步，我们不管所有的限制条件，不管 deadends 和 target 的限制，就思考一个问题：
+如果让你设计一个算法，穷举所有可能的密码组合，你怎么做？
+穷举呗，再简单一点，如果你只转一下锁，有几种可能？总共有 4 个位置，每个位置可以向上转，也可以向下转，也就是有 8 种可能对吧。
+比如说从 "0000" 开始，转一次，可以穷举出 "1000", "9000", "0100", "0900"... 共 8 种密码。
+然后，再以这 8 种密码作为基础，对每个密码再转一下，穷举出所有可能...
+仔细想想，这就可以抽象成一幅图，每个节点有 8 个相邻的节点，又让你求最短距离，这不就是典型的 BFS 
+
+ */
+var openLock = function(deadends, target) {
+  //记录死亡密码
+  let deads = new Set(deadends)
+  //记录已穷举过的密码
+  let visited = new Set()
+  let queue = []
+  let step = 0
+  queue.push('0000')
+  visited.add('0000')
+
+  while(queue.length > 0){
+    let size = queue.length
+    for(let i = 0; i < size; i ++){
+      let cur = queue.shift()
+      if(deads.has(cur)) continue //用while需要注意，此处会跳出，导致无法减小
+      if(cur === target) return step
+      for(let j = 0; j < 4; j ++){
+        let up = plusOne(cur, j)
+        if(!visited.has(up)){
+          queue.push(up)
+          visited.add(up)
+        }
+        let down = minusOne(cur, j)
+        if(!visited.has(down)){
+          queue.push(down)
+          visited.add(down)
+        }
+      }
+    }
+    step ++
+  }
+  return -1
+  function plusOne(s, j){
+    console.log(s)
+    let arr = s.split('')
+    if(arr[j] === '9'){
+      arr[j] = '0'
+    }else{
+      arr[j] = parseInt(arr[j]) + 1 + ''
+    }
+    return arr.join('')
+  }
+  function minusOne(s, j){
+    let arr = s.split('')
+    if(arr[j] === '0'){
+      arr[j] = '9'
+    }else{
+      arr[j] = parseInt(arr[j]) - 1 + ''
+    }
+    return arr.join('')
+  }
+};
+
+console.log(openLock(["0000"], "8888"))
+
+  </script>
+</body>
+</html>
