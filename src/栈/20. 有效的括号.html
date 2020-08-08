@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+var isValid = function(s) {
+  let dic = {')': '(', '}': '{', ']': '['}
+  let stack = []
+  for(let i = 0; i < s.length; i ++){
+    if(s[i] === '(' || s[i] === '{' || s[i] === '['){
+      stack.push(s[i])
+    }else {
+      if(stack.pop() !== dic[s[i]]) return false
+    }
+  }
+  return stack.length === 0
+};
+
+  </script>
+</body>
+</html>

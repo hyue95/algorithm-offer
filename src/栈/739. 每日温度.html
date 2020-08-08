@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+//暴力法
+/* var dailyTemperatures = function(T) {
+  let res = []
+  let val = 0
+  for(let i = 0; i < T.length; i ++){
+    for(let j = i + 1; j < T.length; j ++){
+      if(T[j] > T[i]){
+        val = j - i
+        break
+      }
+    }
+    res.push(val)
+    val = 0
+  }
+  return res
+}; */
+
+/* 
+总结部分
+单调递增栈：从 栈底 到 栈顶 递增，栈顶大
+单调递减栈：从 栈底 到 栈顶 递减，栈顶小
+什么时候用单调栈
+通常是一维数组，要寻找任一元素右边（左边）第一个比自己大（小）的元素
+且要求 O(n) 的时间复杂度
+模板套路
+单调递增栈会剔除波峰，留下波谷；单调递减栈会剔除波谷，留下波峰
+
+当前项向左找第一个比自己大的位置 —— 从左向右维护一个单调递减栈
+当前项向左找第一个比自己小的位置 —— 从左向右维护一个单调递增栈
+当前项向右找第一个比自己大的位置 —— 从右向左维护一个单调递减栈
+当前项向右找第一个比自己小的位置 —— 从右向左维护一个单调递增栈
+
+用伪代码描述：
+insert x
+while !stack.empty() && stack.top()<x
+    stack.pop()
+stack.push(x)
+
+作者：hyj8
+链接：https://leetcode-cn.com/problems/daily-temperatures/solution/shou-hui-ti-jie-fang-da-guan-cha-dan-diao-zhan-si-/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+ */
+//单调栈
+var dailyTemperatures = function(T) {
+  let res = new Array(T.length).fill(0)
+  let stack = []
+  for(let i = T.length - 1; i >= 0; i --){
+    while(stack.length && T[i] >= T[stack[stack.length - 1]]){
+      stack.pop()
+    }
+    if(stack.length){
+      res[i] = stack[stack.length - 1] - i
+    }
+    stack.push(i)
+  }
+  return res
+};
+
+  </script>
+</body>
+</html>
