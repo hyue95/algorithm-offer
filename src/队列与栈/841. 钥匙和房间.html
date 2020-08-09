@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+//BFS
+var canVisitAllRooms = function(rooms) {
+  let opens = new Set()
+  let keys = [0]
+  while(keys.length){
+    let key = keys.shift()
+    if(!opens.has(key)){
+      opens.add(key)
+      for(let otherKey of rooms[key]){
+        keys.push(otherKey)
+      }
+    }
+  }
+  return opens.size === rooms.length
+};
+
+//DFS
+var canVisitAllRooms = function(rooms) {
+  let opens = new Set()
+  function openRooms(key){
+    if(!opens.has(key)){
+      opens.add(key)
+      for(let otherKey of rooms[key]){
+        openRooms(otherKey)
+      }
+    }
+  }
+  openRooms(0)
+  return opens.size === rooms.length
+};
+
+  </script>
+</body>
+</html>
