@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+var floodFill = function(image, sr, sc, newColor) {
+  let row = image.length
+  if(row === 0) return []
+  let col = image[0].length
+  let color = image[sr][sc]
+  function dsp(i, j){
+    if(i >= 0 && i < row && j >= 0 && j < col && image[i][j] === color && image[i][j] !== newColor){
+      image[i][j] = newColor
+      dsp(i - 1, j)
+      dsp(i + 1, j)
+      dsp(i, j - 1)
+      dsp(i, j + 1)
+    }
+  }
+  dsp(sr, sc)
+  return image
+};
+
+  </script>
+</body>
+</html>
