@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+//dfs
+var cloneGraph = function(node) {
+  let visited = {}
+  function dfs(node){
+    if(!node) return
+    if(visited[node]) return visited[node]
+    let clone = new Node(node.val, [])
+    visited[node] = clone
+    for(let key of node.neighbors){
+      clone.neighbors.push(dfs(key))
+    }
+    return clone
+  }
+  return dfs(node)
+};
+
+
+
+  </script>
+</body>
+</html>

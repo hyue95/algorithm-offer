@@ -8,9 +8,55 @@
 <body>
   <script>
 
+//逆序递归解法
 var evalRPN = function(tokens) {
+  let fun = () => {
+    let char = tokens.pop()
+    let num //因为是逆序，减法和除法不能交换位置，需要先记录
+    switch (char) {
+      case '+':
+        return fun() + fun()
+      case '-':
+        num = fun()
+        return fun() - num
+      case '*':
+        return fun() * fun()
+      case '/':
+        num = fun()
+        return parseInt(fun() / num)
+      default:
+        return parseInt(char)
+    }
+  }
+  return fun()
+};
 
-
+//栈解法
+var evalRPN = function(tokens) {
+  let stack = []
+  let num
+  for(let char of tokens){
+    switch (char) {
+      case '+':
+        stack.push(stack.pop() + stack.pop())
+        break
+      case '-':
+        num = stack.pop()
+        stack.push(stack.pop() - num)
+        break
+      case '*':
+        stack.push(stack.pop() * stack.pop())
+        break
+      case '/':
+        num = stack.pop()
+        stack.push(parseInt(stack.pop() / num))
+        break
+      default:
+        stack.push(parseInt(char))
+        break
+    }
+  }
+  return stack.pop()
 };
 
   </script>

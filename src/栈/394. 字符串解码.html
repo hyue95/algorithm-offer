@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+//栈解法
+var decodeString = function(s) {
+  let res = ''
+  let multi = 0
+  let stack_multi = []
+  let stack_res = []
+
+  for(let c of s){
+    if(c === '['){
+      stack_multi.push(multi)
+      stack_res.push(res)
+      multi = 0
+      res = ''
+    }else if(c === ']'){
+      let temp = ''
+      let cur_multi = stack_multi.pop()
+      for(let i = 0; i < cur_multi; i ++){
+        temp += res
+      }
+      res = stack_res.pop() + temp
+    }else if(c >= '0' && c <= '9'){
+      multi = multi * 10 + parseInt(c)
+    }else{
+      res += c
+    }
+  }
+  return res
+};
+
+  </script>
+</body>
+</html>
