@@ -21,6 +21,24 @@ var isValid = function(s) {
   return stack.length === 0
 };
 
+
+new Promise((res, rej) => {
+  console.log('promise1')
+  res()
+}).then(() => {
+  console.log('then11')
+  new Promise((res, rej) => {
+    console.log('promise2')
+    res()
+  }).then(() => {
+    console.log('then21')
+  }).then(() => {
+    console.log('then23')
+  })
+}).then(() => {
+  console.log('then12')
+})
+
   </script>
 </body>
 </html>

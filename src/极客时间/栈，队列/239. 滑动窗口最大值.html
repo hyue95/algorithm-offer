@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+//因为k是有限个，所以可以用队列
+//双端队列（维护单调队列，最大值在最前面，递减）
+var maxSlidingWindow = function(nums, k) {
+  if(nums.length === 0) return []
+  let window = [], res = []
+  for(let i = 0; i < nums.length; i ++){
+    if(i >= k && window[0] <= i - k){
+      window.shift()
+    }
+    while(window.length && nums[window[window.length - 1]] <= nums[i]){
+      window.pop()
+    }
+    window.push(i)
+    if(i >= k - 1){
+      res.push(nums[window[0]])
+    }
+  }
+  return res
+};
+
+  </script>
+</body>
+</html>

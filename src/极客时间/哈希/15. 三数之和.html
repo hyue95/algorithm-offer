@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+//有bug，但思路可参考
+var threeSum = function(nums) {
+  if(nums.length < 3) return []
+  let res = []
+  nums.sort((a, b) => a - b)
+
+  for(let i = 0; i < nums.length-2; i ++){
+    if(i >= 1 && nums[i-1] === nums[i]) continue  //首位为0，未去重  
+    if(nums[i] > 0) break
+    let map = new Map()
+    for(let j = i + 1; j < nums.length; j ++){
+      if(!map.has(nums[j])){
+        map.set(-nums[i] - nums[j], 1)
+      }else{
+        res.push([nums[i], -nums[i] - nums[j], nums[j]])
+        while(j >= 1 && nums[j-1] === nums[j] && j < nums.length ) j ++
+      }
+    }
+  }
+  return res
+};
+
+var threeSum = function(nums) {
+  nums.sort((a, b) => a - b)
+  if(nums[0] > 0 || nums[nums.length-1] < 0) return []
+  let result = []
+  for(let i = 0; i < nums.length-2; i ++){
+    if(i >= 1 && nums[i] === nums[i-1]) continue
+    if(nums[i] > 0) break
+    let target = 0 - nums[i]
+    let start = i + 1
+    let end = nums.length-1
+    while(start < end){
+      if(nums[start] + nums[end] > target){
+        end --
+      }else if(nums[start] + nums[end] < target){
+        start ++
+      }else{
+        result.push([nums[i], nums[start], nums[end]])
+        while(start < end && nums[start] === nums[start+1]) start ++
+        while(start < end && nums[end] === nums[end-1]) end --
+        start ++
+        end --
+      }
+    }
+  }
+  return result
+};
+
+console.log(threeSum(
+  [0,0,0,0,0,0,0]))
+
+  </script>
+</body>
+</html>

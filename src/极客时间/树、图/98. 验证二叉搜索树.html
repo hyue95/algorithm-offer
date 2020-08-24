@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+/* var isValidBST = function(root) {
+  let res = []
+  function traversal(root){
+    if(root === null) return
+    traversal(root.left)
+    res.push(root.val)
+    traversal(root.right)
+  }
+  traversal(root)
+  for(let i = 0; i < res.length-1; i ++){
+    if(res[i] >= res[i+1]){
+      return false
+    }
+  }
+  return true
+}; */
+
+
+var isValidBST = function(root) {
+  let pre = null
+  return helper(root)
+  function helper(root){
+    if(root === null) return true
+    if(!helper(root.left)) return false
+    if(pre && pre.val >= root.val) return false
+    pre = root
+    return helper(root.right)
+  }
+};
+
+var isValidBST = function(root) {
+  return isValid(root, -Infinity, Infinity)
+  //子树边界
+  function isValid(root, min, max){
+    if(root === null) return true
+    if(root.val >= max || root.val <= min) return false
+    return isValid(root.left, min, root.val) && isValid(root.right, root.val, max)
+  }
+};
+
+  </script>
+</body>
+</html>

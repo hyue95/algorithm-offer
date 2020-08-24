@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+//字符串排序
+var isAnagram = function(s, t) {
+  let arr_s = s.split('').sort((a, b) => a.localeCompare(b))
+  let arr_t = t.split('').sort((a, b) => a.localeCompare(b))
+  return arr_s.join() === arr_t.join()
+};
+
+//哈希表
+var isAnagram = function(s, t) {
+  let obj_s = {}
+  let obj_t = {}
+  for(let i = 0; i < s.length; i ++){
+    if(obj_s[s[i]]){
+      obj_s[s[i]] ++
+    }else{
+      obj_s[s[i]] = 1
+    }
+  }
+  for(let i = 0; i < t.length; i ++){
+    if(obj_t[t[i]]){
+      obj_t[t[i]] ++
+    }else{
+      obj_t[t[i]] = 1
+    }
+  }
+  //....
+};
+console.log(isAnagram("anagram", "nagaram"))
+
+//数组解
+var isAnagram = function(s, t) {
+  let arr_s = Array(s.length).fill(0)
+  let arr_t = Array(t.length).fill(0)
+  let aCharCode = 'a'.charCodeAt()
+  for(let i = 0; i < s.length; i ++){
+    arr_s[s[i].charCodeAt() - aCharCode] ++
+  }
+  for(let i = 0; i < t.length; i ++){
+    arr_t[t[i].charCodeAt() - aCharCode] ++
+  }
+  //....
+};
+
+
+  </script>
+</body>
+</html>
