@@ -34,6 +34,7 @@ var calculate = function(s) {
       num = 0
     }
   }
+  //因为最后是个数字，只有当符号才计算，故需要手动进行最后的运算
   res = res + sign * num
   return res
 };
