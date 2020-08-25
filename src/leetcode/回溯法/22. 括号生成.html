@@ -8,9 +8,25 @@
 <body>
   <script>
 
+//深度遍历 回溯法
 var generateParenthesis = function(n) {
+  let res = []
+  if(n === 0) return res
+  let i = 0
+  dfs("", n, n, res)
+  return res
 
+  function dfs(curStr, left, right, res){
+    if(left === 0 && right === 0){
+      res.push(curStr)
+      return
+    }
+    if(left > right) return
+    if(left > 0) dfs(curStr + "(", left - 1, right, res)
+    if(right > 0) dfs(curStr + ")", left, right - 1, res)
+  }
 };
+console.log(generateParenthesis(3))
    
   </script>
 </body>
