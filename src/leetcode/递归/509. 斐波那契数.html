@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+var fib = function(N) {
+  if(N < 2) return N
+  let memo = new Map()
+  if(memo.has(N)){
+    return memo.get(N)
+  }else{
+    memo.set(N, fib(N - 1) + fib(N - 2))
+    return fib(N - 1) + fib(N - 2)
+  }
+};
+
+
+  </script>
+</body>
+</html>

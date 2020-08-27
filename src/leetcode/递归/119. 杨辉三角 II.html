@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+var getRow = function(rowIndex) {
+  let res = []
+  for(let i = 0; i <= rowIndex; i ++){
+    let layer = Array(i + 1).fill(1)
+    for(let j = 1; j < i; j ++){
+      let pre = res[i - 1]
+      layer[j] = pre[j-1] + pre[j]
+    }
+    res.push(layer)
+  }
+  return res[rowIndex]
+};
+
+  </script>
+</body>
+</html>
