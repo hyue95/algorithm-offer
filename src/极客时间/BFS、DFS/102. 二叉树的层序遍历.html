@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+//BFS
+var levelOrder = function(root) {
+  if(root === null) return []
+  let queue = []
+  let res = []
+  let level = 0
+  queue.push(root)
+  while(queue.length){
+    let size = queue.length
+    res[level] = []
+    while(size --){
+      let node = queue.shift()
+      res[level].push(node.val)
+      if(node.left) queue.push(node.left)
+      if(node.right) queue.push(node.right)
+    }
+    level ++
+  }
+  return res
+};
+
+//DFS
+var levelOrder = function(root) {
+  if(!root) return []
+  let res = []
+  dfs(root, 0)
+  return res
+  
+  function dfs(node, level){
+    if(!node) return
+    if(res.length < level + 1){
+      res.push([])
+    }
+    res[level].push(node.val)
+    if(node.left) dfs(node.left, level + 1)
+    if(node.right) dfs(node.right, level + 1)
+  }
+};
+  </script>
+</body>
+</html>

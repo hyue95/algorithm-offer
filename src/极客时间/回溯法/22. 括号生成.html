@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+var generateParenthesis = function(n) {
+  let res = []
+  if(n === 0) return res
+  dfs("", n, n)
+  function dfs(s, left, right){
+    if(left === 0 && right === 0){
+      res.push(s)
+      return
+    }
+    if(left > 0) dfs(s + '(', left - 1, right)
+    if(left < right && right > 0) dfs(s + ')', left, right - 1)
+  }
+  return res
+};
+console.log(generateParenthesis(3))
+
+  </script>
+</body>
+</html>

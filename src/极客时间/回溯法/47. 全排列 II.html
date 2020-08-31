@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+/* var permuteUnique = function(nums) {
+  let len = nums.length
+  let res = []
+  if(len === 0) return res
+  nums.sort((a, b) => a - b)
+  let visited = Array(len).fill(false)
+  backtrack(nums, [], visited)
+  return res
+  function backtrack(nums, path, visited){
+    if(len === path.length){
+      res.push([...path])
+      return
+    }
+    for(let i = 0; i < len; i ++){
+      if(visited[i]) continue
+      if(i > 0 && nums[i] === nums[i - 1] && visited[i - 1]) break
+      path.push(nums[i])
+      visited[i] = true
+      backtrack(nums, path, visited)
+      path.pop()
+      visited[i] = false
+    }
+  }
+}; */
+
+var permuteUnique = function(nums) {
+  let len = nums.length
+  let res = []
+  if(len === 0) return res
+  nums.sort((a, b) => a - b)
+  let visited = Array(len).fill(false)
+  backtrack(nums, [], visited)
+  return res
+  function backtrack(nums, path, visited){
+    if(len === path.length){
+      res.push([...path])
+      return
+    }
+    for(let i = 0; i < len; i ++){
+      if(visited[i]) continue
+      if(i > 0 && nums[i] === nums[i - 1] && !visited[i - 1]) continue
+      path.push(nums[i])
+      visited[i] = true
+      backtrack(nums, path, visited)
+      path.pop()
+      visited[i] = false
+    }
+  }
+};
+console.log(permuteUnique([1,2,1]))
+
+  </script>
+</body>
+</html>

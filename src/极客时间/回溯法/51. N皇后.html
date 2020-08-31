@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+var solveNQueens = function(n) {
+  if(n === 0) return []
+  let res = [], cols = new Set(), pie = new Set(), na = new Set()
+  backtrack(n, 0, [])
+  return generateRes(n)
+
+  function backtrack(n, row, arr){
+    if(row >= n){
+      res.push(arr)
+      return
+    }
+    for(let col = 0; col < n; col ++){
+      if(cols.has(col) || pie.has(row + col) || na.has(row - col)) continue
+      cols.add(col)
+      pie.add(row + col)
+      na.add(row - col)
+      
+      backtrack(n, row + 1, [...arr, col])
+      cols.delete(col)
+      pie.delete(row + col)
+      na.delete(row - col)
+
+    }
+  }
+
+  function generateRes(n){
+    let board = []
+    for(let key of res){
+      for(let i in key){
+        board.push()
+      }
+    }
+  }
+};
+console.log(solveNQueens(4))
+  </script>
+</body>
+</html>

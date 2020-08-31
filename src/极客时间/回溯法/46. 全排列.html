@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+/* var permute = function(nums) {
+  let res = []
+  backtrack(nums, [])
+  function backtrack(nums, arr){
+    if(nums.length === arr.length){
+      res.push([...arr])
+      return
+    }
+    for(key of nums){
+      if(arr.includes(key)) continue
+      arr.push(key)
+      backtrack(nums, arr)
+      arr.pop()
+    }
+  }
+  return res
+}; */
+
+var permute = function(nums) {
+  let res = []
+  let visited = Array(nums.length).fill(false)
+  backtrack(nums, [])
+  function backtrack(nums, arr){
+    if(nums.length === arr.length){
+      res.push([...arr])
+      return
+    }
+    for(let i = 0; i < nums.length; i ++){
+      if(visited[i]) continue
+      visited[i] = true
+      arr.push(nums[i])
+      backtrack(nums, arr)
+      visited[i] = false
+      arr.pop()
+    }
+  }
+  return res
+};
+console.log(permute([1,2,3]))
+
+  </script>
+</body>
+</html>
