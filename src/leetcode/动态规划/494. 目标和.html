@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+//回溯
+var findTargetSumWays = function(nums, S) {
+  let len = nums.length
+  if(len === 0) return 0
+  let memo = new Map()
+  return backtrack(0, S)
+  function backtrack(i, rest){
+    if(i === len){
+      if(rest === 0) return 1
+      return 0
+    }
+    let key = i + ',' + rest
+    if(memo.has(key)){
+      return memo.get(key)
+    }
+    let res = backtrack(i + 1, rest - nums[i]) + backtrack(i + 1, rest + nums[i])
+    memo.set(key, res)
+    return res
+  }
+};
+
+//dp
+var findTargetSumWays = function(nums, S) {
+  let len = nums.length
+  if(len === 0) return 0
+  let dp = Array(len).fill(0).map(e => Array(len).fill(0))
+  for()
+
+};
+
+  </script>
+</body>
+</html>
